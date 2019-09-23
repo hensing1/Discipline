@@ -1,0 +1,16 @@
+﻿<Window x:Class="Discipline.DialogBoxAddTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Discipline"
+        mc:Ignorable="d"
+        Title="Add Task" Height="147" Width="324" ResizeMode="NoResize" Topmost="True">
+    <Grid>
+        <Label Content="Enter Task Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBox_NewTaskName" Height="23" Margin="10,41,10,0" TextWrapping="Wrap" Text="New Task" VerticalAlignment="Top" Cursor="IBeam" IsInactiveSelectionHighlightEnabled="True"/>
+        <Button x:Name="Button_CreateTask" Content="Create Task" HorizontalAlignment="Left" Margin="83,78,0,10" Width="110" Click="Button_CreateTask_Click"/>
+        <Button x:Name="CancelButton" Content="Cancel" Margin="198,78,10,10" Click="CancelButton_Click"/>
+
+    </Grid>
+</Window>

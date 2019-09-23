@@ -1,0 +1,20 @@
+﻿<Window x:Class="Discipline.DialogBoxOpenTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Open Task" Height="450" Width="233" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="204*"/>
+            <RowDefinition Height="217*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Select a Task:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="ListBox_Tasks" Margin="12,45,10,47" SelectionChanged="ListBox_Tasks_SelectionChanged" Grid.RowSpan="2"/>
+        <Button x:Name="Button_Cancel" Content="Cancel" Margin="115,175.431,10,10" Click="Button_Cancel_Click" IsCancel="True" Grid.Row="1"/>
+        <Button x:Name="Button_CreateTask" Content="Create New Task" Margin="115,10,10,164" Click="Button_CreateTask_Click"/>
+        <Button x:Name="Button_OpenTask" Content="Open Task" Margin="10,175,117,10" Click="Button_OpenTask_Click" IsEnabled="False" Grid.Row="1"/>
+
+    </Grid>
+</Window>

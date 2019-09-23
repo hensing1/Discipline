@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D113A20E-83B0-4918-8B0F-B761181615F7}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Discipline</RootNamespace>
     <AssemblyName>Discipline</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -34,7 +34,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HenrysDevLib">
+      <HintPath>..\..\HenrysDevLib\HenrysDevLib\bin\Debug\netstandard2.0\HenrysDevLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +61,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DialogBoxOpenTask.xaml.cs">
+      <DependentUpon>DialogBoxOpenTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TaskView.xaml.cs">
+      <DependentUpon>TaskView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="DialogBoxAddTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogBoxOpenTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,10 +83,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DialogBoxAddTask.xaml.cs">
+      <DependentUpon>DialogBoxAddTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FileHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TaskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,5 +122,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

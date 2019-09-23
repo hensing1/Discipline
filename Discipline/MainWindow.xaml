@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Discipline"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Discipline" Height="720" Width="1280" ResizeMode="CanMinimize">
     <Grid>
-        
+        <TabControl x:Name="TaskTabs" Margin="10">
+            <TabItem Header="Welcome!">
+                <Grid Background="#FFE5E5E5" Height="643" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1248">
+                    <Button x:Name="Button_AddTask" Content="Add Task" HorizontalAlignment="Center" Width="250" Height="70" VerticalAlignment="Center" Margin="0,0,0,100" Cursor="Hand" Click="Button_AddTask_Click"/>
+                    <Button x:Name="Button_OpenTask" Content="Open Task" HorizontalAlignment="Center" Width="250" Height="70" VerticalAlignment="Center" Margin="0,100,0,0" Cursor="Hand" Click="Button_OpenTask_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
