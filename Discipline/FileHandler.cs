@@ -71,7 +71,7 @@ namespace Discipline
 
             tasksDoc.Save(XmlURI);
 
-            WriteDcf(new bool[GetDaysYear(year)], name, year);
+            WriteDcf(new bool[DaysInYear(year)], name, year);
         }
 
         private static string ConvertToFileName(string taskName, int year)
@@ -113,7 +113,7 @@ namespace Discipline
             }
             catch (InvalidOperationException)
             {
-                int numdays = HenrysDevLib.Misc.Time.GetDaysYear(year);
+                int numdays = HenrysDevLib.Misc.Time.DaysInYear(year);
                 WriteDcf(new bool[numdays], taskName, year);
                 //--
                 XmlNode fileNode = taskNode.ChildNodes.Cast<XmlNode>().Where(node => node.Name == "File")
@@ -122,7 +122,7 @@ namespace Discipline
             }
 
             string dcfContent = File.ReadAllText(dcfPath);
-            bool[] calendar = new bool[HenrysDevLib.Misc.Time.GetDaysYear(year)];
+            bool[] calendar = new bool[HenrysDevLib.Misc.Time.DaysInYear(year)];
             int cIndex = 0;
             bool b = dcfContent[0] == 'T';
             dcfContent = dcfContent.Substring(1);

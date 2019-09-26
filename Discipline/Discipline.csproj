@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DayButton.cs" />
     <Compile Include="DialogBoxOpenTask.xaml.cs">
       <DependentUpon>DialogBoxOpenTask.xaml</DependentUpon>
     </Compile>
