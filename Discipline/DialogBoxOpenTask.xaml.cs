@@ -25,8 +25,12 @@ namespace Discipline
         {
             handler = new FileHandler();
             InitializeComponent();
-            Console.WriteLine(ListBox_Tasks.SelectedIndex);
             ListBox_Tasks.ItemsSource = handler.GetTasks();
+            if (ListBox_Tasks.Items.Count > 0)
+            {
+                ListBox_Tasks.SelectedItem = ListBox_Tasks.Items.GetItemAt(0);
+                ListBox_Tasks.Focus();
+            }
         }
 
         private void Button_CreateTask_Click(object sender, RoutedEventArgs e)
@@ -58,6 +62,12 @@ namespace Discipline
         {
             if (ListBox_Tasks.SelectedIndex != -1)
                 Button_OpenTask.IsEnabled = true;
+        }
+
+        private void ListBox_Tasks_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+                Button_OpenTask_Click(sender, null);
         }
     }
 }

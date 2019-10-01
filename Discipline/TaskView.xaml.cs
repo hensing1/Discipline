@@ -47,32 +47,30 @@ namespace Discipline
             bool ly = IsLeapYear(year);
             calendar = fileHandler.ReadDcf(TaskName, year);
             currentYear = year;
+            Label_CurrentYear.Content = $"Current Year: {currentYear}";
 
             int gapInPx = 3;
-            double buttonWidth = (Grid_Calendar.Width - 10 + gapInPx) / 31 - gapInPx;
-            double buttonHeight = (Grid_Calendar.Height - 10 + gapInPx) / 12 - gapInPx;
+            double buttonWidth = (Grid_Calendar.Width - 10 + gapInPx) / 32 - gapInPx;
+            double buttonHeight = (Grid_Calendar.Height - 10 + gapInPx) / 13 - gapInPx;
+            for (int i = 1; i <= 31; i++)
+            {
+                Label l = GetStandardCalendarLabel(buttonWidth, buttonHeight);
+                l.Margin = new Thickness(i * (buttonWidth + gapInPx), 0, 0, 0);
+                l.Content = i.ToString();
+                Grid_Calendar.Children.Add(l);
+            }
             for (Month m = Month.January; m <= Month.December; m++)
             {
+                Label l = GetStandardCalendarLabel(buttonWidth, buttonHeight);
+                l.Margin = new Thickness(0, ((int)m) * (buttonHeight + gapInPx), 0, 0);
+                l.Content = m.ShortName();
+                Grid_Calendar.Children.Add(l);
+
                 int init = IndexOfFirstDayInMonth(m, ly);
                 for (int index = init; index < init + DaysInMonth(m, ly); index++)
                 {
-                    DayButton b = new DayButton
-                    {
-                        Index = index,
-                        Width = buttonWidth,
-                        Height = buttonHeight,
-                        HorizontalAlignment = HorizontalAlignment.Left,
-                        VerticalAlignment = VerticalAlignment.Top,
-                        Margin = new Thickness((index - IndexOfFirstDayInMonth(m, ly)) * (buttonWidth + gapInPx), ((int)m - 1) * (buttonHeight + gapInPx), 0, 0),
-                        Background = calendar[index] ? ColorTrue : ColorFalse,
-                        Visibility = Visibility.Visible
-                    };
-                    b.Click += (o, e) =>
-                    {
-                        calendar[b.Index] ^= true;
-                        b.Background = calendar[b.Index] ? ColorTrue : ColorFalse;
-                        fileHandler.WriteDcf(calendar, TaskName, currentYear);
-                    };
+                    DayButton b = GetStandardCalendarButton(index, buttonWidth, buttonHeight);
+                    b.Margin = new Thickness((index - IndexOfFirstDayInMonth(m, ly) + 1) * (buttonWidth + gapInPx), ((int)m) * (buttonHeight + gapInPx), 0, 0);
                     Grid_Calendar.Children.Add(b);
                 }
             }
@@ -90,27 +88,21 @@ namespace Discipline
             calendar = fileHandler.ReadDcf(TaskName, currentYear);
 
             int gapInPx = 3;
-            double buttonWidth = (Grid_Calendar.Width - 10 + gapInPx) / 7 - gapInPx;
-            double buttonHeight = (Grid_Calendar.Height - 10 + gapInPx) / 5 - gapInPx;
-            for (int i = start; i < start + DaysInMonth(month); i++)
+            double buttonWidth = (Grid_Calendar.Width - 10 + gapInPx) / 8 - gapInPx;
+            double buttonHeight = (Grid_Calendar.Height - 10 + gapInPx) / 6 - gapInPx;
+
+            for (int i = 1; i <= 7; i++)
             {
-                DayButton b = new DayButton
-                {
-                    Index = i,
-                    Width = buttonWidth,
-                    Height = buttonHeight,
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Top,
-                    Margin = new Thickness(weekday * (buttonWidth + gapInPx), week * (buttonHeight + gapInPx), 0, 0),
-                    Background = calendar[i] ? ColorTrue : ColorFalse,
-                    Visibility = Visibility.Visible
-                };
-                b.Click += (o, e) =>
-                {
-                    calendar[b.Index] ^= true;
-                    b.Background = calendar[b.Index] ? ColorTrue : ColorFalse;
-                    fileHandler.WriteDcf(calendar, TaskName, currentYear);
-                };
+                Label l = GetStandardCalendarLabel(buttonWidth, buttonHeight);
+                l.Margin = new Thickness(i * (buttonWidth + gapInPx), 0, 0, 0);
+                l.Content = ((Weekday)(i - 1)).ShortName();
+                Grid_Calendar.Children.Add(l);
+            }
+            for (int i = start; i < start + DaysInMonth(month, ly); i++)
+            {
+                DayButton b = GetStandardCalendarButton(i, buttonWidth, buttonHeight);
+                b.Margin = new Thickness((weekday + 1) * (buttonWidth + gapInPx), (week + 1) * (buttonHeight + gapInPx), 0, 0);
+                b.Content = (i - start + 1).ToString();
                 Grid_Calendar.Children.Add(b);
                 if (++weekday % 7 == 0)
                 {
@@ -118,6 +110,55 @@ namespace Discipline
                     week++;
                 }
             }
+            int weeks = (week == 4 && weekday == 0) ? 4 : 5;
+            for (int i = 1; i <= weeks; i++)
+            {
+                Label l = GetStandardCalendarLabel(buttonWidth, buttonHeight);
+                l.Margin = new Thickness(0, i * (buttonHeight + gapInPx), 0, 0);
+                l.Content = $"Week {ComputeCalendarWeek(start + i * 7, currentYear)}";
+                Grid_Calendar.Children.Add(l);
+            }
+        }
+
+        private Label GetStandardCalendarLabel(double width, double height)
+        {
+            return new Label
+            {
+                Width = width,
+                Height = height,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Foreground = Brushes.White,
+                Visibility = Visibility.Visible
+            };
+        }
+
+        private DayButton GetStandardCalendarButton(int index, double width, double height)
+        {
+            DayButton b = new DayButton
+            {
+                Index = index,
+                Width = width,
+                Height = height,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Background = calendar[index] ? ColorTrue : ColorFalse,
+                Visibility = Visibility.Visible
+            };
+            b.Click += (o, e) =>
+            {
+                calendar[b.Index] ^= true;
+                b.Background = calendar[b.Index] ? ColorTrue : ColorFalse;
+                fileHandler.WriteDcf(calendar, TaskName, currentYear);
+            };
+            if (DateTime.Today.Year == currentYear && IndexOfDate(DateTime.Today) == index)
+            {
+                b.BorderBrush = Brushes.White;
+                b.BorderThickness = new Thickness(3d);
+            }
+            return b;
         }
 
         private void Button_PreviousYear_Click(object sender, RoutedEventArgs e)

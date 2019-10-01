@@ -11,7 +11,7 @@
             <RowDefinition Height="217*"/>
         </Grid.RowDefinitions>
         <Label Content="Select a Task:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="ListBox_Tasks" Margin="12,45,10,47" SelectionChanged="ListBox_Tasks_SelectionChanged" Grid.RowSpan="2"/>
+        <ListBox x:Name="ListBox_Tasks" Margin="12,45,10,47" SelectionChanged="ListBox_Tasks_SelectionChanged" Grid.RowSpan="2" KeyDown="ListBox_Tasks_KeyDown"/>
         <Button x:Name="Button_Cancel" Content="Cancel" Margin="115,175.431,10,10" Click="Button_Cancel_Click" IsCancel="True" Grid.Row="1"/>
         <Button x:Name="Button_CreateTask" Content="Create New Task" Margin="115,10,10,164" Click="Button_CreateTask_Click"/>
         <Button x:Name="Button_OpenTask" Content="Open Task" Margin="10,175,117,10" Click="Button_OpenTask_Click" IsEnabled="False" Grid.Row="1"/>

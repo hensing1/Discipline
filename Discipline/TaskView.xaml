@@ -10,9 +10,10 @@
 
     <Grid Background="#FFE5E5E5">
         <Grid Background="DarkGray" Height="50" Margin="10,10,10,0" VerticalAlignment="Top">
-            <Button x:Name="Button_PreviousYear" Content="Previous Year" Margin="10,10,1118,10" Click="Button_PreviousYear_Click"/>
-            <Button x:Name="Button_NextYear" Content="Next Year" Margin="115,10,1013,10" Click="Button_NextYear_Click"/>
-            <ComboBox x:Name="ComboBox_SelectMonth" HorizontalAlignment="Left" Margin="439,10,0,0" VerticalAlignment="Top" Width="150" Height="30" SelectionChanged="ComboBox_SelectMonth_SelectionChanged">
+            <Label x:Name="Label_CurrentYear" Content="Current Year:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="Button_PreviousYear" Content="Previous Year" Margin="133,10,995,10" Click="Button_PreviousYear_Click"/>
+            <Button x:Name="Button_NextYear" Content="Next Year" Margin="238,10,890,10" Click="Button_NextYear_Click"/>
+            <ComboBox x:Name="ComboBox_SelectMonth" HorizontalAlignment="Left" Margin="562,10,0,0" VerticalAlignment="Top" Width="150" Height="30" SelectionChanged="ComboBox_SelectMonth_SelectionChanged">
                 <ComboBoxItem>January</ComboBoxItem>
                 <ComboBoxItem>February</ComboBoxItem>
                 <ComboBoxItem>March</ComboBoxItem>
@@ -26,13 +27,13 @@
                 <ComboBoxItem>November</ComboBoxItem>
                 <ComboBoxItem>December</ComboBoxItem>
             </ComboBox>
-            <Label Content="Select Month:" HorizontalAlignment="Left" Margin="349,12,0,0" VerticalAlignment="Top" Height="30" Width="90"/>
+            <Label Content="Select Month:" HorizontalAlignment="Left" Margin="472,12,0,0" VerticalAlignment="Top" Height="30" Width="90"/>
             <Button x:Name="Button_CloseTask" Content="Close Task" Margin="1118,10,10,10" IsCancel="True"/>
-            <CheckBox x:Name="CheckBox_ViewEntireYear" Content="View Entire Year" HorizontalAlignment="Left" Margin="220,18,0,0" VerticalAlignment="Top" Click="CheckBox_ViewEntireYear_Click" IsChecked="True"/>
-            <GridSplitter HorizontalAlignment="Left" Margin="342,10,0,10" Width="2"/>
+            <CheckBox x:Name="CheckBox_ViewEntireYear" Content="View Entire Year" HorizontalAlignment="Left" Margin="343,18,0,0" VerticalAlignment="Top" Click="CheckBox_ViewEntireYear_Click" IsChecked="True"/>
+            <GridSplitter HorizontalAlignment="Left" Margin="465,10,0,10" Width="2"/>
         </Grid>
-        <Grid Background="DarkSlateGray" Margin="10,65,10,10">
-            <Grid x:Name="Grid_Calendar" Margin="10,10,10,10" Height="548" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1208"/>
+        <Grid Background="DarkSlateGray" Margin="10,70,10,10">
+            <Grid x:Name="Grid_Calendar" Margin="0,0,10,10" Height="553" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1218"/>
         </Grid>
 
     </Grid>

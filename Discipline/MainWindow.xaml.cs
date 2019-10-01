@@ -30,9 +30,11 @@ namespace Discipline
         {
             DialogBoxAddTask dialogBox = new DialogBoxAddTask();
             bool? dialogResult = dialogBox.ShowDialog();
-            OpenTask(dialogBox.TaskName);
             if ((bool)dialogResult)
+            {
+                OpenTask(dialogBox.TaskName);
                 MessageBox.Show("New task successfully created.");
+            }
         }
 
         private void Button_OpenTask_Click(object sender, RoutedEventArgs e)
