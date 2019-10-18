@@ -115,10 +115,7 @@ namespace Discipline
             {
                 int numdays = HenrysDevLib.Misc.Time.DaysInYear(year);
                 WriteDcf(new bool[numdays], taskName, year);
-                //--
-                XmlNode fileNode = taskNode.ChildNodes.Cast<XmlNode>().Where(node => node.Name == "File")
-                                            .Single(e => e.Attributes.GetNamedItem("Year").Value == year.ToString());
-                dcfPath = fileNode.Attributes.GetNamedItem("FileName").Value;
+                return ReadDcf(taskName, year);
             }
 
             string dcfContent = File.ReadAllText(dcfPath);
@@ -194,7 +191,7 @@ namespace Discipline
                 fileNode.Attributes.Append(fileName);
                 fileNode.Attributes.Append(fileYear);
 
-                tasksDoc.DocumentElement.GetElementsByTagName("Task").Cast<XmlNode>().Single(e => e.Value == taskName).AppendChild(fileNode);
+                tasksDoc.DocumentElement.GetElementsByTagName("Task").Cast<XmlNode>().Single(e => e.Attributes.GetNamedItem("Name").Value == taskName).AppendChild(fileNode);
                 tasksDoc.Save(XmlURI);
 
                 File.WriteAllText(fileNode.Attributes.GetNamedItem("FileName").Value, fileString);
