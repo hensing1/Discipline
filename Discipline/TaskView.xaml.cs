@@ -151,7 +151,7 @@ namespace Discipline
             {
                 calendar[b.Index] ^= true;
                 b.Background = calendar[b.Index] ? ColorTrue : ColorFalse;
-                fileHandler.WriteDcf(calendar, TaskName, currentYear);
+                fileHandler.WriteYear(calendar, TaskName, currentYear);
             };
             if (DateTime.Today.Year == currentYear && IndexOfDate(DateTime.Today) == index)
             {
